@@ -39,6 +39,32 @@ export class DSA101_BST {
         this.size++;
     }
 
+    // add( value: number ){
+    //     if( value == null ) return;
+    //     var newNode = new DSA101_BST_Node(value);
+    //     if( this.root == null ){ 
+    //         this.root = newNode;
+    //     }
+    //     else{
+    //         var parentNode: DSA101_BST | DSA101_BST_Node = this;
+    //         var isLeft: "right" | "left" | "root" = "root";
+            
+    //         do{
+    //             parentNode = parentNode[isLeft];
+
+    //             if( parentNode["value"] > value ){
+    //                 isLeft = "left";
+    //             }
+    //             else {
+    //                 isLeft = "right";
+    //             }
+    //         } while( parentNode[isLeft] != null )
+
+    //         parentNode[isLeft] = newNode;
+    //     }
+    //     this.size++;
+    // }
+
     quickPrint(){
         var outStr = 'DSA101_BST:{';
         outStr += '\"size\":'+this.size;
