@@ -12,6 +12,16 @@ bts.add(11);
 bts.add(10);
 bts.add(6);
 bts.add(1);
+bts.add(2);
+bts.add(3);
+bts.add(20);
+bts.add(12);
+bts.add(15);
+bts.add(13);
+bts.add(18);
+console.log(bts.quickPrint());
+  
+bts.remove(9)
 
 console.log(bts.quickPrint());
 console.log(new Date().getTime() - date);

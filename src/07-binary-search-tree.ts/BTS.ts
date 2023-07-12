@@ -9,16 +9,16 @@ export class DSA101_BST {
         this.size = 0;
     }
 
-    add( value ){
+    add( value: number ){
         if( value == null ) return;
-        var newNode = new DSA101_BST_Node(value);
+        let newNode = new DSA101_BST_Node(value);
         if( this.root == null ){ 
             this.root = newNode;
         }
         else{
-            var currNode = this.root;
-            var parentNode = null;
-            var isLeft = false;
+            let currNode = this.root;
+            let parentNode = null;
+            let isLeft = false;
             while( currNode != null ){
                 parentNode = currNode;
                 if( parentNode.value > value ){
@@ -39,15 +39,62 @@ export class DSA101_BST {
         this.size++;
     }
 
+    remove(value: number){        
+        if( value == null || this.root == null ) return;
+
+        let currNode = this.root;
+        let parentNode = null;
+        let isLeft = false;
+        while( currNode != null ){
+            parentNode = currNode;
+            if( parentNode.value > value ){
+                isLeft = true;
+                currNode = parentNode.left;
+            }
+            else {
+                isLeft = false;
+                currNode = parentNode.right;
+            }            
+            
+            if(currNode.value == value){ // s
+                console.log(currNode);
+                
+                if(currNode.right){
+                    isLeft ? parentNode.left = currNode.right : parentNode.right = currNode.right
+                    if(currNode.left){
+                        this.recursion(currNode.left, parentNode.right)
+                    }
+                }else if(currNode.left){
+                    isLeft ? parentNode.left = currNode.left : parentNode.right = currNode.left;
+                }
+                break;
+            }
+        }
+    }
+
+    private recursion(leftNode: DSA101_BST_Node, currNode: DSA101_BST_Node){
+        if(!currNode.left){
+            currNode.left = leftNode;
+            return
+        }
+        if(!currNode.right){
+            this.recursion(leftNode, currNode.left)
+        } else{
+            this.recursion(currNode.left, currNode.right)            
+        }
+
+        currNode.left = leftNode;
+    }
+
     // add( value: number ){
     //     if( value == null ) return;
-    //     var newNode = new DSA101_BST_Node(value);
+    //     let newNode = new DSA101_BST_Node(value);
     //     if( this.root == null ){ 
     //         this.root = newNode;
     //     }
     //     else{
-    //         var parentNode: DSA101_BST | DSA101_BST_Node = this;
-    //         var isLeft: "right" | "left" | "root" = "root";
+    //         let parentNode: DSA101_BST | DSA101_BST_Node = this;
+    //         let isLeft: "right" | "left" | "root" = "root";
             
     //         do{
     //             parentNode = parentNode[isLeft];
@@ -66,10 +113,10 @@ export class DSA101_BST {
     // }
 
     quickPrint(){
-        var outStr = 'DSA101_BST:{';
+        let outStr = 'DSA101_BST:{';
         outStr += '\"size\":'+this.size;
         outStr += '\"R\":'+this.root.quickPrint();
-        outStr+='};'
+        outStr+='\n};'
         return outStr;
     }
 }

@@ -24,7 +24,7 @@ export class DSA101_BST_Node {
         } else {
             outStr += this.right.quickPrint(prefix,'R');
         }
-        outStr += '}';
+        outStr += prefix + '}';
         return outStr;
     }
 
