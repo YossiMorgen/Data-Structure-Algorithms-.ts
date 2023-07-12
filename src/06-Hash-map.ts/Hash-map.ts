@@ -13,7 +13,7 @@ export class DSA101_HashMap {
         }
     }
 
-    getIndex(key){
+    getIndex(key: any){
         // Calculate hash of key
         const hashValue = this.hash1(key);
         // get index by modulo
@@ -23,7 +23,7 @@ export class DSA101_HashMap {
         return index;
     }
 
-    set(key, value){
+    set(key: any, value: any){
         const bucketIndex = this.getIndex(key);
         if( !bucketIndex ) return;
         // new entry to add to HashMap
