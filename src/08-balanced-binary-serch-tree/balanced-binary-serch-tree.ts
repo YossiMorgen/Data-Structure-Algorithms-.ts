@@ -7,7 +7,7 @@ export default class BBST{
         this.root = new BBST_Node(value);
     }
 
-    public insert(value: number){
+    public add(value: number){
         if(!this.root){
             this.root = new BBST_Node(value);
             return
@@ -42,7 +42,7 @@ export default class BBST{
         }
         currNode.height = currNode.height > newBBST.height ? currNode.height : newBBST.height;
 
-        
+
         if(currNode.left && currNode.right ){
             if(currNode.left.height - currNode.right.height > 1){
                 if(currNode.left.left && currNode.left.right){
@@ -127,6 +127,122 @@ export default class BBST{
         currNode.left = newRoot.right;
         newRoot.right = currNode;
         return newRoot;
+    }
+
+    public remove(value: number){
+        if(!this.root){return}
+        this.root = this.recursionRemove(this.root, value);
+    }
+
+    private recursionRemove(currNode: BBST_Node, value: number): BBST_Node{
+        if(!currNode){return null}
+
+        if(currNode.value == value){
+            if(!currNode.left && !currNode.right){
+                return null
+            } else if(!currNode.left){
+                return currNode.right
+            } else if(!currNode.right){
+                return currNode.left
+            } else {
+                let tempNode = currNode.right;
+                while(tempNode.left){
+                    tempNode = tempNode.left;
+                }
+                currNode.value = tempNode.value;
+
+                currNode.right = this.recursionRemove(currNode.right, tempNode.value);
+            }
+        } else if(value > currNode.value){
+            currNode.right = this.recursionRemove(currNode.right, value);
+        } else {
+            currNode.left = this.recursionRemove(currNode.left, value);
+        }
+
+        if(currNode.left && currNode.right ){
+            if(currNode.left.height - currNode.right.height > 1){
+                if(currNode.left.left && currNode.left.right){
+                    if(currNode.left.left.height > currNode.left.right.height){
+                        currNode = this.rotateRight(currNode);
+
+                    } else {
+                        currNode.left = this.rotateLeft(currNode.left);
+                        currNode = this.rotateRight(currNode);
+
+                    }
+                } else if(currNode.left.left){
+                    currNode = this.rotateRight(currNode);
+                } else {
+                    currNode.left = this.rotateLeft(currNode.left);
+                    currNode = this.rotateRight(currNode);
+
+                }
+            } else if(currNode.right.height - currNode.left.height > 1){
+                if(currNode.right.right && currNode.right.left){
+                    if(currNode.right.right.height > currNode.right.left.height){
+                        currNode = this.rotateLeft(currNode);
+                    } else {
+
+                        currNode.right = this.rotateRight(currNode.right);
+                        currNode = this.rotateLeft(currNode);
+
+                    }
+                } else if(currNode.right.right){
+
+                    currNode = this.rotateLeft(currNode);
+                } else {
+                    currNode.right = this.rotateRight(currNode.right);
+                    currNode = this.rotateLeft(currNode);
+
+                }
+            }
+
+        } else if(currNode.left){
+            if(currNode.left.height > 1){
+
+                if(currNode.left.left && currNode.left.right){
+                    if(currNode.left.left.height > currNode.left.right.height){
+                        currNode = this.rotateRight(currNode);
+
+                    } else {
+                        currNode.left = this.rotateLeft(currNode.left);
+                        currNode = this.rotateRight(currNode);
+
+                    }
+                } else if(currNode.left.left){
+                    currNode = this.rotateRight(currNode);
+                } else {
+                    currNode.left = this.rotateLeft(currNode.left);
+
+                    currNode = this.rotateRight(currNode);
+
+                }
+            }
+        } else if(currNode.right){
+            if(currNode.right.height > 1){
+                if(currNode.right.right && currNode.right.left){
+
+                    if(currNode.right.right.height > currNode.right.left.height){
+
+                        currNode = this.rotateLeft(currNode);
+                    } else {
+                        currNode.right = this.rotateRight(currNode.right);
+                        currNode = this.rotateLeft(currNode);
+
+                    }
+                } else if(currNode.right.right){
+
+                    currNode = this.rotateLeft(currNode);
+                } else {
+                    currNode.right = this.rotateRight(currNode.right);
+
+                    currNode = this.rotateLeft(currNode);
+
+                }
+            }
+        }
+
+        return currNode;
     }
 
     quickPrint(){

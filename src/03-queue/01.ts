@@ -18,18 +18,17 @@ export default class Queue {
         return this.queue[this.headIndex];
     }
 
-    public push(val: any){
+    public enqueue(val: any){
         this.tailIndex ++;
         if(this.headIndex == -1) this.headIndex = 0;
         this.queue[this.tailIndex] = val;
         this.size ++;
     }
 
-    public pop(){
+    public dequeue(){
         if(this.headIndex == -1) return;
         const output = this.peak();
         delete this.queue[this.headIndex];
-        console.log(this.queue[this.headIndex]);
         this.headIndex ++;
         this.size --;
         if(this.size == 0) this.headIndex = -1;

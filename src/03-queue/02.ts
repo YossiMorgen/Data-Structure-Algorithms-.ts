@@ -10,7 +10,7 @@ export default class ChatClient{
     }
 
     public sendMsg(msg: string){
-        this.outMsgQ.push(msg);
+        this.outMsgQ.enqueue(msg);
     }
 
     public readMsg(){

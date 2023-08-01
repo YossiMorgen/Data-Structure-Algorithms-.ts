@@ -1,5 +1,5 @@
 export class DSA101_LinkedList_Node {
-    value: any;
+    value: number;
     next: DSA101_LinkedList_Node;
 
     constructor(value,next){

@@ -28,6 +28,11 @@ export class DSA101_BST_Node {
         return outStr;
     }
 
+    toArray(arr){
+        if( this.left != null ){ this.left.toArray(arr); }
+        arr.push(this.value);
+        if( this.right != null ){ this.right.toArray(arr); }
+    }
 }
 
 export default DSA101_BST_Node;

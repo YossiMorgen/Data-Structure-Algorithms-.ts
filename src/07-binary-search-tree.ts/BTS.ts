@@ -48,17 +48,20 @@ export class DSA101_BST {
         while( currNode != null ){
             parentNode = currNode;
             if( parentNode.value > value ){
-                isLeft = true;
-                currNode = parentNode.left;
+                if(parentNode.left){
+                    isLeft = true;
+                    currNode = parentNode.left;
+                } else {
+                    break;
+                }
             }
             else {
-                isLeft = false;
-                currNode = parentNode.right;
+                if(parentNode.right){
+                    isLeft = false;
+                    currNode = parentNode.right;                }
             }            
             
-            if(currNode.value == value){ // s
-                console.log(currNode);
-                
+            if(currNode.value == value){                
                 if(currNode.right){
                     isLeft ? parentNode.left = currNode.right : parentNode.right = currNode.right
                     if(currNode.left){
@@ -118,6 +121,10 @@ export class DSA101_BST {
         outStr += '\"R\":'+this.root.quickPrint();
         outStr+='\n};'
         return outStr;
+    }
+
+     toArray(arr){
+        if( this.root != null ){ this.root.toArray(arr); }
     }
 }
 

@@ -17,7 +17,7 @@ export class DSA101_LinkedList {
         return this.size;
     }
 
-    add( value ){
+    add( value: number ){
         if( value == undefined || value == null ){ return undefined; }
 
         if( this.size == 0 ){
@@ -33,7 +33,31 @@ export class DSA101_LinkedList {
         this.size++;
     }
 
-    get(indx){
+    remove(value: number){
+        if( value == undefined || value == null ){ return undefined; }
+        if( this.size == 0 ){ return undefined; }
+
+        if( this.head.value == value ){
+            this.head = this.head.next;
+        }
+        else{
+            var currNode = this.head;
+            var prevNode = null;
+            while( currNode != null ){
+                if( currNode.value == value ){
+                    prevNode.next = currNode.next;
+
+                    currNode = null;
+                    this.size--;
+                    return;
+                }
+                prevNode = currNode;
+                currNode = currNode.next;
+            }
+        }
+    }
+
+    get(indx: number){
         if( indx < 0 || indx >= this.size ){ return null; }
         let outputNode = this.head;
         for( let i=0; i<indx; i++ ){
@@ -41,12 +65,6 @@ export class DSA101_LinkedList {
         }
         return outputNode.value;
     }
-
-    // a > b > c > d > e
-    // get(5) --> null
-    // get(0) --> a
-    // get(1) --> b
-    // get(4) --> e
 
     toString(){
         var output = 'DSA101_LinkedList::{';
@@ -82,7 +100,7 @@ export class DSA101_LinkedList {
         return -1;
     }
 
-    insertAt(value: any, indx: number){
+    insertAt(value: number, indx: number){
         if( indx < 0 || indx > this.size ){ return undefined; }
         if( indx == 0 ){
             this.head = new DSA101_LinkedList_Node(value,this.head);
