@@ -10,11 +10,19 @@ export default function romanToInt(s: string): number {
         ["M", 1000],
     ])
 
-    let num = 0;
-    let prev = 0;
+    let num = romanMap.get(s[0]);
+    let prev = num;
 
-    for(let i = 0; i < s.length; i ++){
-        
+    for(let i = 1; i < s.length; i ++){
+        const val = romanMap.get(s[i])
+        // console.log(i, val, num);
+        num += val
+        if(prev < val ){
+            num -= prev * 2
+        }
+
+        prev = val
     }
 
+    return num;
 }
