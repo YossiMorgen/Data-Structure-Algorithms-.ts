@@ -1,4 +1,4 @@
-import DSA101_BST from "../../07-binary-search-tree.ts/BTS";
+import DSA101_BST from "../../data_structure/07-binary-search-tree.ts/BTS";
 
 function initializeInputArray(sz: number){
     let arrOut = new Array()

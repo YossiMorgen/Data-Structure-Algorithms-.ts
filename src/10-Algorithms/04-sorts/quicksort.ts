@@ -1,6 +1,6 @@
 var cycles = 0;
 
-function quickSort(arr){
+function quickSort(arr: number[]){
     if( arr.length <= 1 ){ return arr; }
     let tmp = arr[0]
     if( arr.length == 2 ){
@@ -37,5 +37,5 @@ function quickSort(arr){
 
 export {
     quickSort
-    
+
 }
