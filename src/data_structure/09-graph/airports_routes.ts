@@ -51,3 +51,25 @@ export function bfs(start = 'PHX', graph = airportsRoutes(), destination = 'EZE'
         
     }
 }
+
+export function dfs(start = 'PHX', graph = airportsRoutes(), destination = 'EZE', visited = new Map<string, boolean>()){
+     if(start === destination){
+        return true;
+    }
+
+    for(const neighbor of graph.adjacencyList.get(start)){
+        if(!visited.get(neighbor)){
+            visited.set(neighbor, true);
+        } else {    
+            continue;
+        }
+                
+        console.log(neighbor);
+
+        if(dfs(neighbor, graph, destination, visited)){
+            return true;
+        }
+    }
+
+    return false;
+}
