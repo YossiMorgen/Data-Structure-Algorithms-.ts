@@ -36,7 +36,7 @@ export function bfs(start = 'PHX', graph = airportsRoutes(), destination = 'EZE'
         for (const route of routes) {
 
             if (route === destination) {
-                console.log("Found it!");
+                console.log("Found " + destination + " from " + airport + "!");
                 return;
             }
             
